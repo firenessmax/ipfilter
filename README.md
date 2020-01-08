@@ -7,7 +7,7 @@ A package for IP Filtering in Go (golang)
 ### Install
 
 ```
-go get github.com/jpillora/ipfilter
+go get github.com/cristiangomez/ipfilter
 ```
 
 ### Features
@@ -16,32 +16,9 @@ go get github.com/jpillora/ipfilter
 * Thread-safe
 * IPv4 / IPv6 support
 * Subnet support
-* Location filtering (via [GeoLite2](https://dev.maxmind.com/geoip/geoip2/geolite2/))
 * Simple HTTP middleware
 
 ### Usage
-
-**Country-block HTTP middleware**
-
-```go
-h := http.Handler(...)
-myProtectedHandler := ipfilter.Wrap(h, ipfilter.Options{
-    //block requests from China and Russia by IP
-    BlockedCountries: []string{"CN", "RU"},
-})
-http.ListenAndServe(":8080", myProtectedHandler)
-```
-
-**Country-block stand-alone**
-
-```go
-f, err := ipfilter.New(ipfilter.Options{
-    BlockedCountries: []string{"CN"},
-})
-
-f.Blocked("116.31.116.51") //=> true (CN)
-f.Allowed("216.58.199.67") //=> true (US)
-```
 
 **Async allow LAN hosts middleware**
 
